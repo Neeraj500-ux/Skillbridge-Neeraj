@@ -1,0 +1,15 @@
+export const categories = [
+  { id: 'tech', name: 'Technology', icon: 'Cpu', courses: 86 },
+  { id: 'webdev', name: 'Web Development', icon: 'Code2', courses: 124 },
+  { id: 'appdev', name: 'App Development', icon: 'Smartphone', courses: 58 },
+  { id: 'ai-ml', name: 'AI & Machine Learning', icon: 'BrainCircuit', courses: 47 },
+  { id: 'marketing', name: 'Digital Marketing', icon: 'Megaphone', courses: 73 },
+  { id: 'business', name: 'Business', icon: 'Briefcase', courses: 91 },
+  { id: 'finance', name: 'Finance', icon: 'LineChart', courses: 39 },
+  { id: 'design', name: 'Graphic Design', icon: 'Palette', courses: 64 },
+  { id: 'video', name: 'Video Editing', icon: 'Clapperboard', courses: 28 },
+  { id: 'photography', name: 'Photography', icon: 'Camera', courses: 22 },
+  { id: 'personal-dev', name: 'Personal Development', icon: 'Sparkles', courses: 55 },
+  { id: 'communication', name: 'Communication', icon: 'MessagesSquare', courses: 31 },
+  { id: 'career', name: 'Career Development', icon: 'GraduationCap', courses: 44 },
+];

@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cdd3e6 transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#F7F7FB] text-navy-900 font-body antialiased;
+}
+
+.dark body {
+  @apply bg-navy-950 text-slate-100;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+::selection {
+  background: #d7caff;
+}
+
+@layer utilities {
+  .container-shell {
+    @apply max-w-[1320px] mx-auto px-5 sm:px-8;
+  }
+  .card-surface {
+    @apply bg-white dark:bg-navy-800 border border-navy-100/70 dark:border-white/5 rounded-lg shadow-soft;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md font-semibold text-sm px-5 py-2.5 transition-all duration-250 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand-gradient text-white shadow-soft hover:shadow-lift hover:-translate-y-0.5;
+  }
+  .btn-secondary {
+    @apply btn border border-navy-200 dark:border-white/15 text-navy-700 dark:text-slate-100 hover:border-violet-400 hover:text-violet-600 bg-white dark:bg-transparent;
+  }
+  .btn-ghost {
+    @apply btn text-navy-600 dark:text-slate-300 hover:bg-navy-50 dark:hover:bg-white/5;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+  .input-field {
+    @apply w-full rounded-md border border-navy-200 dark:border-white/10 bg-white dark:bg-navy-900 px-4 py-2.5 text-sm text-navy-900 dark:text-slate-100 placeholder:text-navy-300 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-violet-400 transition;
+  }
+  .label-text {
+    @apply block text-sm font-medium text-navy-600 dark:text-slate-300 mb-1.5;
+  }
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 5s ease-in-out infinite; }
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  @apply relative overflow-hidden bg-navy-100 dark:bg-white/10 rounded-md;
+}
+.skeleton::after {
+  content: '';
+  position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: shimmer 1.6s infinite;
+}
+.dark .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
