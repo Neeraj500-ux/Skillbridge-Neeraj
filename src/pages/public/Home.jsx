@@ -400,37 +400,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* INSTRUCTORS */}
-      <section className="container-shell px-4 sm:px-6 py-14 sm:py-20">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-7 sm:mb-8">
-          <div className="text-center sm:text-left">
-            <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-300 mb-3">Our Mentors</span>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-navy-900 dark:text-white">Learn From The Best</h2>
-            <p className="text-navy-400 dark:text-slate-400 mt-1.5">Practitioners currently working in the field, not just teaching from slides.</p>
+      {/* PREMIUM INSTRUCTORS */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-violet-50/45 to-white py-14 dark:from-navy-950 dark:via-violet-950/15 dark:to-navy-950 sm:py-20 lg:py-24">
+        <div className="pointer-events-none absolute -left-28 top-16 h-72 w-72 rounded-full bg-violet-500/15 blur-[105px]" />
+        <div className="pointer-events-none absolute -right-28 bottom-10 h-72 w-72 rounded-full bg-blue-500/15 blur-[105px]" />
+        <div className="container-shell relative px-4 sm:px-6">
+          <div className="mx-auto mb-9 max-w-3xl text-center sm:mb-12">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-200/80 bg-white/80 px-4 py-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-violet-600 shadow-sm backdrop-blur-xl dark:border-violet-500/20 dark:bg-white/5 dark:text-violet-300 sm:text-xs">
+              <Icons.Award size={14} /> Meet Our Mentors
+            </span>
+            <h2 className="font-display text-[clamp(1.8rem,7vw,2.4rem)] font-black leading-[1.14] tracking-tight text-navy-900 dark:text-white lg:text-5xl">
+              Learn directly from proven{' '}
+              <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-500 bg-clip-text text-transparent">industry experts</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-navy-400 dark:text-slate-400 sm:text-base">Get practical guidance, current industry knowledge and career-focused mentorship from professionals doing the work today.</p>
           </div>
-          <Link to="/instructors" className="flex self-center sm:self-auto items-center gap-1 text-sm font-semibold text-violet-600 dark:text-violet-300">
-            View all <ArrowRight size={14} />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {instructors.slice(0, 3).map((ins) => (
-            <Link
-              key={ins.id}
-              to={`/instructor/${ins.id}`}
-              className="relative card-surface p-5 sm:p-6 text-center overflow-hidden hover:shadow-lift transition-all duration-300 hover:-translate-y-1.5 hover:ring-1 hover:ring-violet-300/60 dark:hover:ring-violet-500/30"
-            >
-              <div className="absolute inset-x-0 -top-10 h-24 bg-gradient-to-br from-violet-500/10 via-electric-500/5 to-transparent" />
-              <img
-                src={ins.avatar}
-                alt={ins.name}
-                className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full mx-auto object-cover object-top mb-5 ring-4 ring-white dark:ring-navy-900 shadow-lg"
-              />
-              <p className="relative font-display font-bold text-navy-900 dark:text-white">{ins.name}</p>
-              <p className="relative text-xs text-navy-400 mb-3">{ins.title}</p>
-              <div className="relative flex justify-center"><Rating value={ins.rating} size={12} /></div>
-              <p className="relative text-xs text-navy-400 mt-2">{ins.students.toLocaleString('en-IN')} students · {ins.courses} courses</p>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {instructors.slice(0, 3).map((ins, index) => {
+              const gradients = ['from-violet-500 via-purple-500 to-indigo-600', 'from-blue-500 via-sky-500 to-cyan-500', 'from-fuchsia-500 via-pink-500 to-rose-500'];
+              const gradient = gradients[index % gradients.length];
+              return (
+                <Link key={ins.id} to={`/instructor/${ins.id}`} className="group relative min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2">
+                  <div className={`absolute -inset-px rounded-[25px] bg-gradient-to-br ${gradient} opacity-20 transition-all duration-500 group-hover:opacity-70`} />
+                  <article className="relative flex h-full min-h-[355px] flex-col overflow-hidden rounded-3xl border border-white/80 bg-white/90 p-5 text-center shadow-[0_15px_45px_rgba(15,23,42,0.07)] backdrop-blur-xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_25px_60px_rgba(79,70,229,0.16)] dark:border-white/10 dark:bg-navy-900/90 sm:p-6">
+                    <div className={`absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r ${gradient} transition-transform duration-500 group-hover:scale-x-100`} />
+                    <div className="relative mx-auto mb-5">
+                      <div className={`absolute -inset-2 rounded-full bg-gradient-to-br ${gradient} opacity-25 blur-md transition-opacity duration-500 group-hover:opacity-60`} />
+                      <img src={ins.avatar} alt={ins.name} className="relative h-24 w-24 rounded-full border-4 border-white object-cover object-top shadow-xl dark:border-navy-900 sm:h-28 sm:w-28" />
+                      <span className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-emerald-500 text-white shadow-md dark:border-navy-900"><Icons.BadgeCheck size={16} /></span>
+                    </div>
+                    <h3 className="font-display text-lg font-extrabold text-navy-900 dark:text-white sm:text-xl">{ins.name}</h3>
+                    <p className="mt-1 text-xs font-semibold text-violet-600 dark:text-violet-300">{ins.title}</p>
+                    <div className="mt-3 flex items-center justify-center gap-2"><Rating value={ins.rating} size={13} /><span className="text-xs font-bold text-navy-600 dark:text-slate-300">{Number(ins.rating || 0).toFixed(1)}</span></div>
+                    <div className="my-5 grid grid-cols-2 divide-x divide-slate-100 rounded-2xl border border-slate-100 bg-slate-50/80 py-3 dark:divide-white/10 dark:border-white/10 dark:bg-white/[0.035]">
+                      <div><p className="text-sm font-black text-navy-900 dark:text-white">{Number(ins.students || 0).toLocaleString('en-IN')}+</p><p className="text-[10px] text-navy-400">Students</p></div>
+                      <div><p className="text-sm font-black text-navy-900 dark:text-white">{ins.courses}</p><p className="text-[10px] text-navy-400">Courses</p></div>
+                    </div>
+                    <div className="mt-auto flex items-center justify-center gap-2 text-xs font-bold text-violet-600 dark:text-violet-300">View Profile <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" /></div>
+                  </article>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-9 flex justify-center sm:mt-11">
+            <Link to="/instructors" className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-violet-600/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-600/30 min-[420px]:w-auto">
+              Meet All Instructors <ArrowRight size={17} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-          ))}
+          </div>
         </div>
       </section>
 
