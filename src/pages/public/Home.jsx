@@ -96,6 +96,11 @@ export default function Home() {
     { name: 'Simran Kaur', role: 'Marketing Executive', avatar: 'https://i.pravatar.cc/80?img=20', quote: 'I went from zero to running paid campaigns for my company within six weeks. The instructors actually work in the field.' },
     { name: 'Aman Gupta', role: 'Frontend Developer', avatar: 'https://i.pravatar.cc/80?img=33', quote: 'The React bootcamp is the most practical course I have taken online. I shipped a real project by the end of it.' },
     { name: 'Tara Bhatt', role: 'Freelance Photographer', avatar: 'https://i.pravatar.cc/80?img=25', quote: 'Clear, well-paced, and the certificate actually helped me land my first paid shoot.' },
+    { name: 'Rohan Mehta', role: 'UI/UX Designer', avatar: 'https://i.pravatar.cc/80?img=12', quote: 'The lessons are beautifully structured and easy to follow. I built a stronger portfolio and started getting better client projects.' },
+    { name: 'Priya Sharma', role: 'Data Analyst', avatar: 'https://i.pravatar.cc/80?img=47', quote: 'The practical assignments helped me understand data analysis much faster than theory alone. I now feel confident working on real datasets.' },
+    { name: 'Arjun Verma', role: 'Small Business Owner', avatar: 'https://i.pravatar.cc/80?img=53', quote: 'I applied the digital marketing strategies directly to my business and saw a clear improvement in enquiries within the first month.' },
+    { name: 'Neha Kapoor', role: 'Content Strategist', avatar: 'https://i.pravatar.cc/80?img=32', quote: 'The expert feedback was incredibly valuable. Every module felt relevant, practical, and designed for real career growth.' },
+    { name: 'Kabir Singh', role: 'Full Stack Developer', avatar: 'https://i.pravatar.cc/80?img=68', quote: 'From clean fundamentals to complete projects, the learning experience was smooth. It gave me the confidence to apply for developer roles.' },
   ];
 
   useEffect(() => {
@@ -454,25 +459,57 @@ export default function Home() {
 
       {/* TESTIMONIALS */}
       <section className="relative bg-navy-950 py-14 sm:py-20 overflow-hidden">
+        <style>{`
+          @keyframes testimonial-auto-right-to-left {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-50% - var(--testimonial-half-gap))); }
+          }
+
+          .testimonial-auto-track {
+            --testimonial-half-gap: 10px;
+            width: max-content;
+            animation: testimonial-auto-right-to-left 38s linear infinite;
+            will-change: transform;
+          }
+
+          .testimonial-auto-track:hover {
+            animation-play-state: paused;
+          }
+
+          @media (max-width: 639px) {
+            .testimonial-auto-track {
+              --testimonial-half-gap: 8px;
+              animation-duration: 44s;
+            }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .testimonial-auto-track {
+              animation-play-state: paused;
+            }
+          }
+        `}</style>
         <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-72 w-[36rem] rounded-full bg-violet-600/10 blur-3xl" />
         <div className="container-shell relative px-4 sm:px-6">
           <div className="text-center mb-10">
             <span className="badge bg-white/5 text-violet-300 ring-1 ring-white/10 mb-3">Testimonials</span>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white">What learners are saying</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {testimonials.map((t) => (
+          <div className="overflow-hidden" aria-label="Automatically moving learner testimonials">
+            <div className="testimonial-auto-track flex gap-4 py-2 sm:gap-5">
+            {[...testimonials, ...testimonials].map((t, index) => (
               <div
-                key={t.name}
-                className="relative bg-white/5 border border-white/10 rounded-lg p-5 sm:p-6 backdrop-blur-sm hover:bg-white/[0.07] hover:-translate-y-1 transition-all duration-300"
+                key={`${t.name}-${index}`}
+                aria-hidden={index >= testimonials.length}
+                className="relative flex min-h-[245px] w-[calc(100vw-32px)] max-w-[390px] shrink-0 flex-col rounded-lg border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.07] sm:w-[360px] sm:p-6 lg:w-[380px]"
               >
                 <Quote className="absolute top-4 right-4 text-white/10" size={32} />
                 <div className="flex text-amber-400 mb-3">
                   {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                 </div>
-                <p className="text-sm text-slate-300 mb-5 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-                <div className="flex items-center gap-3">
-                  <img src={t.avatar} alt={t.name} className="h-9 w-9 rounded-full object-cover ring-2 ring-white/10" />
+                <p className="mb-5 flex-1 text-sm leading-relaxed text-slate-300">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-3 border-t border-white/10 pt-4">
+                  <img src={t.avatar} alt={t.name} loading="lazy" className="h-12 w-12 rounded-full object-cover ring-2 ring-violet-400/30" />
                   <div>
                     <p className="text-sm font-semibold text-white">{t.name}</p>
                     <p className="text-xs text-slate-400">{t.role}</p>
@@ -480,31 +517,106 @@ export default function Home() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="container-shell px-4 sm:px-6 py-14 sm:py-20">
-        <div className="relative overflow-hidden rounded-xl bg-brand-gradient px-5 py-11 min-[380px]:px-7 sm:px-16 sm:py-16 text-center shadow-2xl shadow-violet-600/25">
-          <div className="absolute inset-0 bg-violet-glow" />
-          <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-          <div className="relative">
-            <div className="mx-auto mb-4 h-14 w-14 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center ring-1 ring-white/20">
-              <PlayCircle className="text-white" size={28} />
-            </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white mb-3">Ready to start learning?</h2>
-            <p className="text-white/80 max-w-lg mx-auto mb-7">Join thousands of learners building real, practical skills with Skillbridge today.</p>
+      {/* PREMIUM LIQUID GLASS CTA */}
+<section className="relative overflow-hidden px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+  {/* Background glow */}
+  <div className="pointer-events-none absolute inset-0">
+    <div className="absolute left-[8%] top-4 h-64 w-64 rounded-full bg-violet-500/15 blur-[90px]" />
+    <div className="absolute bottom-0 right-[5%] h-72 w-72 rounded-full bg-blue-500/15 blur-[100px]" />
+  </div>
+
+  <div className="container-shell relative">
+    <div className="group relative mx-auto max-w-6xl overflow-hidden rounded-[26px] border border-violet-300/25 bg-gradient-to-br from-violet-600 via-indigo-600 to-blue-600 p-[1px] shadow-[0_30px_80px_-25px_rgba(109,40,217,0.65)] sm:rounded-[34px]">
+      
+      {/* Animated border shine */}
+      <div className="pointer-events-none absolute -inset-[150%] animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,rgba(255,255,255,0.75)_45deg,transparent_90deg)] opacity-50" />
+
+      {/* Main liquid glass box */}
+      <div className="relative overflow-hidden rounded-[25px] bg-gradient-to-br from-violet-700/95 via-indigo-700/95 to-blue-700/95 px-5 py-10 text-center backdrop-blur-3xl sm:rounded-[33px] sm:px-10 sm:py-14 lg:px-16 lg:py-16">
+        
+        {/* Glass overlays */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.24),transparent_48%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/10" />
+
+        {/* Decorative liquid shapes */}
+        <div className="pointer-events-none absolute -left-16 -top-20 h-52 w-52 rounded-full border border-white/20 bg-white/10 blur-sm backdrop-blur-2xl transition-transform duration-700 group-hover:scale-110" />
+
+        <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full border border-white/15 bg-cyan-300/10 blur-md backdrop-blur-2xl transition-transform duration-700 group-hover:scale-110" />
+
+        <div className="pointer-events-none absolute right-[16%] top-10 hidden h-20 w-20 rounded-full border border-white/20 bg-white/[0.08] shadow-[inset_0_1px_20px_rgba(255,255,255,0.2)] backdrop-blur-xl sm:block" />
+
+        {/* Top glass label */}
+        <div className="relative mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-white shadow-lg shadow-black/10 backdrop-blur-2xl sm:text-xs">
+          <Sparkles className="h-4 w-4 text-amber-300" />
+          Start Your Learning Journey
+        </div>
+
+        {/* Play icon */}
+        <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/25 bg-white/15 text-white shadow-[0_15px_40px_rgba(15,23,42,0.25),inset_0_1px_1px_rgba(255,255,255,0.35)] backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-1 group-hover:rotate-3 group-hover:scale-105 sm:h-[72px] sm:w-[72px] sm:rounded-3xl">
+          <div className="absolute inset-2 rounded-xl bg-gradient-to-br from-white/20 to-transparent sm:rounded-2xl" />
+          <PlayCircle className="relative h-8 w-8 sm:h-9 sm:w-9" />
+        </div>
+
+        {/* CTA content */}
+        <div className="relative mx-auto max-w-3xl">
+          <h2 className="font-display text-[clamp(1.8rem,7vw,2.4rem)] font-black leading-[1.12] tracking-tight text-white lg:text-5xl">
+            Ready to Build Skills That
+            <span className="mt-1 block bg-gradient-to-r from-white via-cyan-100 to-violet-100 bg-clip-text text-transparent">
+              Move Your Career Forward?
+            </span>
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/75 sm:mt-5 sm:text-base lg:text-lg">
+            Join thousands of ambitious learners and gain practical,
+            job-ready skills through expert-led courses designed for real
+            career growth.
+          </p>
+
+          {/* Benefits */}
+          <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-2.5 min-[420px]:grid-cols-3 sm:mt-7 sm:gap-3">
+            {[
+              "Expert Instructors",
+              "Lifetime Access",
+              "Verified Certificate",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.08] px-3 py-2.5 text-xs font-semibold text-white/90 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/15"
+              >
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Button */}
+          <div className="mt-8 sm:mt-9">
             <Link
               to="/register"
-              className="btn w-full sm:w-auto justify-center bg-white text-navy-900 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300 !px-7 !py-3 font-semibold"
+              className="group/button relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-white/60 bg-white px-7 py-4 text-sm font-extrabold text-navy-900 shadow-[0_16px_40px_rgba(15,23,42,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(15,23,42,0.4)] min-[420px]:w-auto sm:px-9 sm:text-base"
             >
-              Start Learning
+              {/* Button shine */}
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-violet-100/80 to-transparent transition-transform duration-700 group-hover/button:translate-x-full" />
+
+              <span className="relative">Start Learning Today</span>
+
+              <ArrowRight className="relative h-5 w-5 transition-transform duration-300 group-hover/button:translate-x-1" />
             </Link>
           </div>
+
+          <p className="mt-4 text-[11px] font-medium text-white/55 sm:text-xs">
+            Start today • Learn at your pace • Grow with confidence
+          </p>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 }
