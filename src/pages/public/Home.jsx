@@ -178,10 +178,37 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mx-auto mt-7 grid max-w-[270px] grid-cols-1 items-center justify-center gap-2 text-left text-xs text-navy-400 dark:text-slate-500 min-[420px]:max-w-none min-[420px]:grid-cols-3 min-[420px]:gap-3 sm:mt-8 lg:mx-0 lg:flex lg:justify-start lg:gap-x-6">
-              <span className="inline-flex items-center justify-start gap-1.5 min-[420px]:justify-center lg:justify-start"><ShieldCheck size={14} className="shrink-0 text-emerald-500" /> Certified courses</span>
-              <span className="inline-flex items-center justify-start gap-1.5 min-[420px]:justify-center lg:justify-start"><Zap size={14} className="shrink-0 text-amber-500" /> Learn at your pace</span>
-              <span className="inline-flex items-center justify-start gap-1.5 min-[420px]:justify-center lg:justify-start"><CheckCircle2 size={14} className="shrink-0 text-violet-500" /> Lifetime access</span>
+           <div className="mt-8 hidden w-fit items-center gap-2 rounded-2xl border border-violet-200/70 bg-white/75 p-2 shadow-[0_12px_35px_rgba(109,40,217,0.10)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05] lg:flex">
+  {/* Certified Courses */}
+  <span className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-navy-600 transition-all duration-300 hover:bg-violet-50 hover:text-violet-700 dark:text-slate-300 dark:hover:bg-violet-500/10 dark:hover:text-violet-300">
+    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-md shadow-violet-500/25 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105">
+      <ShieldCheck size={14} strokeWidth={2.3} />
+    </span>
+
+    Certified courses
+  </span>
+
+  <span className="h-7 w-px bg-violet-200/80 dark:bg-white/10" />
+
+  {/* Learn At Your Pace */}
+  <span className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-navy-600 transition-all duration-300 hover:bg-violet-50 hover:text-violet-700 dark:text-slate-300 dark:hover:bg-violet-500/10 dark:hover:text-violet-300">
+    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-md shadow-violet-500/25 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105">
+      <Zap size={14} strokeWidth={2.3} />
+    </span>
+
+    Learn at your pace
+  </span>
+
+  <span className="h-7 w-px bg-violet-200/80 dark:bg-white/10" />
+
+  {/* Lifetime Access */}
+  <span className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-navy-600 transition-all duration-300 hover:bg-violet-50 hover:text-violet-700 dark:text-slate-300 dark:hover:bg-violet-500/10 dark:hover:text-violet-300">
+    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-md shadow-violet-500/25 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105">
+      <CheckCircle2 size={14} strokeWidth={2.3} />
+    </span>
+
+    Lifetime access
+  </span>
             </div>
           </div>
 
