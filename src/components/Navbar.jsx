@@ -354,7 +354,7 @@ export default function Navbar() {
                     dark:text-white sm:text-lg
                   "
                 >
-                  Skillbridge
+                  creativeadhyayan
                 </span>
 
                 <span
